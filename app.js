@@ -13,12 +13,6 @@
 
   let state = loadState();
   let currentIndex = 0;
-  let soundEnabled = true;
-
-  const correctAudio = new Audio("assets/dung-vo-tay.mp3");
-  const wrongAudio = new Audio("assets/sai.wav");
-  correctAudio.preload = "auto";
-  wrongAudio.preload = "auto";
 
   const el = {
     landingView: document.getElementById("landingView"),
@@ -50,8 +44,6 @@
     dialogSequential: document.getElementById("dialogSequential"),
     dialogCompleted: document.getElementById("dialogCompleted"),
     closeGridBtn: document.getElementById("closeGridBtn"),
-    soundBtn: document.getElementById("soundBtn"),
-    soundIcon: document.getElementById("soundIcon"),
   };
 
   function loadState() {
@@ -133,7 +125,7 @@
       el.resumeBtn.textContent = "Bắt đầu từ câu 1";
       el.resumeHint.textContent = "Bạn chưa bắt đầu ôn tập.";
     } else if (stats.sequential >= TOTAL) {
-      el.resumeBtn.textContent = "Xem lại từ câu 112";
+      el.resumeBtn.textContent = `Xem lại từ câu ${TOTAL}`;
       el.resumeHint.textContent = "Bạn đã hoàn thành toàn bộ lộ trình tuần tự.";
     } else {
       el.resumeBtn.textContent = `Tiếp tục từ câu ${stats.sequential + 1}`;
@@ -145,7 +137,7 @@
 
   function updateStudyStats(stats = getStats()) {
     const percent = (stats.sequential / TOTAL) * 100;
-    el.studySequential.textContent = `${stats.sequential}/${TOTAL}`;
+    el.studySequential.textContent = stats.sequential;
     el.studyProgressFill.style.width = `${percent}%`;
     el.studyCompleted.textContent = stats.completed;
     el.studyWrong.textContent = stats.wrong;
@@ -247,19 +239,7 @@
     const correct = optionIndex === question.correct;
     state.answers[currentIndex] = { selected: optionIndex, correct };
     saveState();
-    playFeedbackSound(correct);
     renderQuestion();
-  }
-
-  function playFeedbackSound(correct) {
-    if (!soundEnabled) return;
-
-    const audio = correct ? correctAudio : wrongAudio;
-    audio.pause();
-    audio.currentTime = 0;
-    audio.play().catch(() => {
-      // Browsers may still block playback in restricted contexts.
-    });
   }
 
   function toggleBookmark() {
@@ -331,20 +311,12 @@
     showLanding();
   }
 
-  function toggleSound() {
-    soundEnabled = !soundEnabled;
-    el.soundBtn.setAttribute("aria-pressed", String(soundEnabled));
-    el.soundIcon.textContent = soundEnabled ? "♪" : "×";
-    el.soundBtn.title = soundEnabled ? "Tắt âm thanh" : "Bật âm thanh";
-  }
-
   el.resumeBtn.addEventListener("click", () => showStudy(getResumeIndex()));
   el.homeBtn.addEventListener("click", showLanding);
   el.backToLandingBtn.addEventListener("click", showLanding);
   el.prevBtn.addEventListener("click", goPrevious);
   el.nextBtn.addEventListener("click", goNext);
   el.bookmarkBtn.addEventListener("click", toggleBookmark);
-  el.soundBtn.addEventListener("click", toggleSound);
   el.closeGridBtn.addEventListener("click", () => el.questionDialog.close());
 
   ["openGridBtnHeader", "openGridBtnLanding", "openGridBtnSidebar", "openGridBtnSidebarLarge"]
@@ -368,8 +340,8 @@
     if (event.key === "ArrowRight" && state.answers[currentIndex]) goNext();
   });
 
-  if (!Array.isArray(QUESTIONS) || TOTAL !== 112) {
-    throw new Error(`Expected 112 questions, received ${TOTAL}`);
+  if (!Array.isArray(QUESTIONS) || TOTAL === 0) {
+    throw new Error("Không tìm thấy câu hỏi để hiển thị.");
   }
 
   updateDashboard();

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#8f171c">
-  <title>Ôn tập 112 câu hỏi</title>
+  <title>Ứng dụng Ôn tập Câu hỏi Nghiệp vụ Chuẩn bị Hội thi</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,10 +22,6 @@
         </span>
       </button>
       <div class="header-actions">
-        <button class="icon-button" id="soundBtn" type="button" aria-pressed="true" title="Bật hoặc tắt âm thanh">
-          <span aria-hidden="true" id="soundIcon">♪</span>
-          <span class="header-action-label">Âm thanh</span>
-        </button>
         <button class="icon-button" id="openGridBtnHeader" type="button">
           <span aria-hidden="true">▦</span>
           <span class="header-action-label">Danh sách câu</span>
@@ -36,8 +32,8 @@
     <main class="main-content">
       <section class="landing" id="landingView">
         <div class="hero-panel">
-          <div class="eyebrow">Lộ trình ôn tập tuần tự</div>
-          <h1>Ứng dụng ôn tập 112 câu hỏi nghiệp vụ chuẩn bị hội thi Cán bộ Kiểm tra giỏi xã Triệu Việt Vương năm 2026</h1>
+          <div class="eyebrow">Hướng dẫn sử dụng</div>
+          <h1>Ứng dụng Ôn tập Câu hỏi Nghiệp vụ Chuẩn bị Hội thi Cán bộ Kiểm tra giỏi xã Triệu Việt Vương năm 2026</h1>
           <p class="hero-copy">
             Mỗi đáp án được lưu trên thiết bị này. Khi quay lại, bạn tiếp tục từ câu đầu tiên chưa hoàn thành trong lộ trình.
           </p>
@@ -46,7 +42,7 @@
             <div class="progress-card-head">
               <div>
                 <span class="muted-label">Tiến độ tuần tự</span>
-                <strong class="progress-number"><span id="landingSequential">0</span><span>/112</span></strong>
+                <strong class="progress-number"><span id="landingSequential">0</span><span> câu</span></strong>
               </div>
               <span class="progress-percent" id="landingPercent">0%</span>
             </div>
@@ -58,7 +54,7 @@
 
           <div class="hero-actions">
             <button class="primary-button" id="resumeBtn" type="button">Bắt đầu từ câu 1</button>
-            <button class="secondary-button" id="openGridBtnLanding" type="button">Xem 112 câu hỏi</button>
+            <button class="secondary-button" id="openGridBtnLanding" type="button">Xem toàn bộ câu hỏi</button>
           </div>
         </div>
 
@@ -99,7 +95,6 @@
             <div class="question-counter">
               <span>Câu</span>
               <strong id="currentNumber">1</strong>
-              <span>/ 112</span>
             </div>
             <button class="bookmark-button" id="bookmarkBtn" type="button" aria-pressed="false">
               <span aria-hidden="true">☆</span>
@@ -108,7 +103,7 @@
           </div>
 
           <div class="study-progress-row">
-            <span>Tiến độ tuần tự <strong id="studySequential">0/112</strong></span>
+            <span>Đã hoàn thành <strong id="studySequential">0</strong> câu</span>
             <div class="compact-progress-track" aria-hidden="true">
               <div class="compact-progress-fill" id="studyProgressFill"></div>
             </div>
@@ -144,7 +139,7 @@
               <div><dt>Cần xem lại</dt><dd id="studyWrong">0</dd></div>
               <div><dt>Đã đánh dấu</dt><dd id="studyBookmarked">0</dd></div>
             </dl>
-            <button class="secondary-button full-width" id="openGridBtnSidebarLarge" type="button">Mở danh sách 112 câu</button>
+            <button class="secondary-button full-width" id="openGridBtnSidebarLarge" type="button">Mở danh sách câu hỏi</button>
           </div>
           <div class="sidebar-note">
             <strong>Mẹo ôn tập</strong>
@@ -160,12 +155,12 @@
       <div class="dialog-header">
         <div>
           <span class="muted-label">Đi tới câu</span>
-          <h2>Danh sách 112 câu hỏi</h2>
+          <h2>Danh sách câu hỏi</h2>
         </div>
         <button class="dialog-close" id="closeGridBtn" type="button" aria-label="Đóng">×</button>
       </div>
       <div class="dialog-progress">
-        <span><strong id="dialogSequential">0</strong>/112 tuần tự</span>
+        <span><strong id="dialogSequential">0</strong> câu đã hoàn thành</span>
         <span><strong id="dialogCompleted">0</strong> đã trả lời</span>
       </div>
       <div class="question-grid" id="questionGrid"></div>
